@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Timer
+public class TimeCounter
 {
     [SerializeField] float time;
     float elapsedTime;
@@ -11,12 +11,12 @@ public class Timer
 
     public bool IsFinished => elapsedTime >= time;
 
-    public Timer(float time)
+    public TimeCounter(float time)
     {
         this.time = time;
     }
 
-    public bool UpdateTimer()
+    public bool Update()
     {
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= time)
@@ -26,12 +26,12 @@ public class Timer
         return false;
     }
 
-    public void ResetTimer()
+    public void Reset()
     {
         elapsedTime = 0;
     }
 
-    public void ResetTimer(float time)
+    public void Reset(float time)
     {
         this.time = time;
         elapsedTime = 0;
