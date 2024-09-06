@@ -7,7 +7,18 @@ public class TimeCounter
     [SerializeField] float time;
     float elapsedTime;
 
-    public float NormalizedTime => Mathf.Clamp01(elapsedTime / time);
+    public float NormalizedTime
+    {
+        get
+        {
+            if (time == 0)
+            {
+                return 0;
+            }
+
+            return Mathf.Clamp01(elapsedTime / time);
+        }
+    }
 
     public bool IsFinished => elapsedTime >= time;
 
@@ -18,14 +29,18 @@ public class TimeCounter
 
     public bool Update()
     {
-        elapsedTime += Time.deltaTime;
+        return Update(Time.deltaTime);
+    }
+
+    public bool Update(float deltaTime)
+    {
+        elapsedTime += deltaTime;
         if (elapsedTime >= time)
         {
             return true;
         }
         return false;
     }
-
     public void Reset()
     {
         elapsedTime = 0;
